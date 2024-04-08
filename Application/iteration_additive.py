@@ -14,8 +14,6 @@ def Est_additive(X_test,Z_train,X_train,U_train,De_train,Beta0,nodevec,m,c0,m0,n
         c1 = C_est(m,U_train,De_train,Z_train,Beta0,g_train,nodevec)
         Lambda_U = I_S(m,c1,U_train,nodevec)
         Beta1 = Beta_est(De_train,Z_train,Lambda_U,g_train)
-        print('Beta=', Beta1)
-        print('c=', c1)
         if (np.max(abs(Beta0-Beta1)) <= 0.01):
             C_index = 1
             break
