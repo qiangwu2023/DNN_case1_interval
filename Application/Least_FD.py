@@ -43,7 +43,7 @@ def LFD(Zi_train,Z_train,X_train,U_train,De_train,Lambda_U,g_train,Beta,n_layer,
 
 
     for epoch in range(n_epoch):
-        pred_ab = model(X_U) # The result predicted by the model is a matrix (n*1), which needs to be converted into a vector later
+        pred_ab = model(X_U)
         loss = Loss(De_train, Zi_train, Z_train, Beta, Lambda_U, g_train, pred_ab[:, 0])
         optimizer.zero_grad()
         loss.backward()
