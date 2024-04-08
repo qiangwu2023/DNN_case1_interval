@@ -71,7 +71,7 @@ def B_other_basis(j, m, u, nodevec):
         return result
 
 def B_spline(m, u, nodevec):
-    B_p = [] # dimension (m+4)
+    B_p = [] 
     for i in range(m-2):
         B_p.append(B_spline_basis(i, 3, u, nodevec))
     for j in range(6):
