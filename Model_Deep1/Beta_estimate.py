@@ -1,7 +1,6 @@
-# Estimate Beta under known g(X), Lambda(U)
+
 import numpy as np
 import scipy.optimize as spo
-# =====local optimum=====
 def Beta_est(De, Z, Lambda_U, g_X):
     def BF(*args):
         Lam = Lambda_U * np.exp(Z * args[0] + g_X)
