@@ -36,7 +36,6 @@ def g_D(X_test, Z_train,X_train,De_train,Lambda_U,Beta0,n_layer,n_node,n_lr,n_ep
     for epoch in range(n_epoch):
         pred_g_X = model(X_train) # The result predicted by the model is a matrix (n*1), which needs to be converted into a vector later
         loss = my_loss(De_train, Z_train, Beta0, Lambda_U, pred_g_X[:, 0])
-        # print('epoch=', epoch, 'loss=', loss.detach().numpy())
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
