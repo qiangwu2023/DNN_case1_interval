@@ -76,6 +76,3 @@ res
         optimizer.step()
     g_train = model(X_train)
 ```
-
-
-+ After downloading the code, just run **Main1.py, Main2.py, Main3.py, Main4.py, and Main_online_news.py** directly, one can get the corresponding numerical results.
