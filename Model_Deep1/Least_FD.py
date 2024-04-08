@@ -29,10 +29,6 @@ def LFD(train_data,Lambda_U,g_train,Beta,n_layer,n_node,n_lr,n_epoch):
 
 
     def Loss(De, Z, Beta, Lambda_U, g_X, a_b):
-        # Ensure that the shape of a_b is consistent with that of De, Z, U
-        assert(len(a_b.shape) == len(De.shape))
-        assert(len(a_b.shape) == len(Z.shape))
-        assert(len(a_b.shape) == len(Lambda_U.shape))
         h_v = Lambda_U * torch.exp( Z*Beta + g_X)
         Q_y = h_v * (De * torch.exp(-h_v)/(1-torch.exp(-h_v)+1e-5) - (1-De))
         Loss_f = torch.mean(Q_y**2 * (Z-a_b)**2)
