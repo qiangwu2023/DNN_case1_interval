@@ -24,7 +24,6 @@ def generate_case_2(n, corr, Beta):
     X = multivariatet(mean,cov,5,n)
     # Constrain X to [0,2]
     X = np.clip(X, 0, 2)
-    # ====The intercept term is approximately equal to 0.88 (by running choose_intercept.py)=====
     g_X = X[:,0]**2/2 + 2*np.log(X[:,1]+1)/5 + 3*np.sqrt(X[:,2])/10 + np.exp(X[:,3])/5 + X[:,4]**3/10 - 1.62
     Y = ndm.rand(n)
     T = (-5 * np.log(Y) * np.exp(-Z * Beta - g_X)) ** 2 
