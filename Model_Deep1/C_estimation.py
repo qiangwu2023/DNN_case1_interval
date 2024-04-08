@@ -1,8 +1,7 @@
-# Under the known g(X), estimate the control points c_1,c_2,...,c_(m-p) of the integrated splines
+
 import numpy as np
 import scipy.optimize as spo
 from I_spline import I_U
-# The unknown coefficients here are all required to be greater than or equal to 0, which is a constraint
 def C_est(m, U, De, Z, Beta, g_X, nodevec):
     Iu = I_U(m, U, nodevec)
     def LF(*args):
