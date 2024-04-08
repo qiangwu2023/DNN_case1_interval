@@ -16,11 +16,9 @@ def B_spline_basis(i, p, u, nodevec):
             beta = 0
         else:
             beta = (nodevec[i + p + 1] - u) / length2
-        # Recursion
         result = alpha * B_spline_basis(i, p - 1, u, nodevec) + beta * B_spline_basis(i + 1, p - 1, u, nodevec)
     return result
 
-# This function returns the value of the jth cubic spline basis function at u on the incomplete interval (j has 6 choices)
 def B_other_basis(j, m, u, nodevec):
     if (j==0):
         if (nodevec[0]<=u) and (u<nodevec[1]):
@@ -70,20 +68,17 @@ def B_other_basis(j, m, u, nodevec):
         else:
             result = 0
         return result
-# Estimate the value of all spline basis functions at the point u, and get a vector with the same dimension (m+4) as the node parameter
+
 def B_spline(m, u, nodevec):
-    B_p = [] # dimension (m+4)
-    # There are (m-2) cubic splines in the middle (the interval is complete)
+    B_p = [] 
     for i in range(m-2):
         B_p.append(B_spline_basis(i, 3, u, nodevec))
-    # Three integral splines on each side (a total of 6 interval incomplete splines)
     for j in range(6):
         B_p.append(B_other_basis(j, m, u, nodevec))
     B_p = np.array(B_p, dtype='float32')
     return B_p
 
 
-# Let u traverse U, n*(m+4) matrix
 def B_S(m, U, nodevec):
     B_u = np.zeros(shape=(len(U),m+4))
     for b in range(len(U)):
