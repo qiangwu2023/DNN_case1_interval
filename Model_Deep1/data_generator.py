@@ -1,7 +1,4 @@
-"""
-Created on Wednesday December 20 2023
-@author: qiangwu
-"""
+
 import numpy as np
 import numpy.random as ndm
 
