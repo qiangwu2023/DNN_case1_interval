@@ -1,10 +1,4 @@
 import numpy as np
-# Calculate the integral spline, i is the control vertex number, p is the degree, u is the substituted value, and NodeVector is the node vector
-# How is the node vector NodeVector determined?
-# There are m+p p-time integral spline basis functions for m inner nodes (monotonically increasing)
-# Consider here -------p=3----------
-# Then write a cubic integral spline (integrate on the basis of quadratic basis spline)
-# This function returns the value of the i-th cubic integral spline basis function at u on the complete interval (i has m-1 choices)
 def inte_basis(i, u, nodevec):
     if (nodevec[i] <= u) and (u < nodevec[i+1]):
         result = (u-nodevec[i])**3/(3*(nodevec[i+2]-nodevec[i])*(nodevec[i+1]-nodevec[i]))
@@ -18,7 +12,6 @@ def inte_basis(i, u, nodevec):
         result = 0
     return result
 
-# This function returns the value of the i-th cubic integral spline basis function at u on an incomplete interval (i has 4 choices)
 def Ic_inte_basis(j, m, u, nodevec):
     if (j==0):
         if (nodevec[0]<=u) and (u<nodevec[1]):
@@ -49,13 +42,11 @@ def Ic_inte_basis(j, m, u, nodevec):
             result = 0
         return result
 
-# Estimate the value of all spline basis functions at the point u, and get a vector with the same dimension (m+3) as the node parameters
+
 def I_spline(m, u, nodevec):
-    B_p = [] # m+3
-    # There are m-1 cubic integral splines in the middle (the interval is complete)
+    B_p = [] 
     for i in range(m-1):
         B_p.append(inte_basis(i, u, nodevec))
-    # Two integral splines on each side (a total of 4 integral splines with incomplete intervals)
     for j in range(4):
         B_p.append(Ic_inte_basis(j, m, u, nodevec))
     B_p = np.array(B_p, dtype='float32')
@@ -68,11 +59,8 @@ def I_U(m, U, nodevec):
         u = U[b]
         I_u[b] = I_spline(m, u, nodevec)
     I_u = np.array(I_u, dtype='float32')
-    # # Let u traverse U, n*(m+3) matrix
     return I_u
 
-
-# Define the vector value of the p-degree integral spline of a function at a vector U
 def I_S(m, c0, U, nodevec):
     B_value = []
     for b in range(len(U)):
